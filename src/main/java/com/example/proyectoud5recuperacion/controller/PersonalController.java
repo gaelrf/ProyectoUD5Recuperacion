@@ -1,11 +1,11 @@
 package com.example.proyectoud5recuperacion.controller;
 
 import com.example.proyectoud5recuperacion.repository.PersonalRepository;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class PersonalController {
 
     private final PersonalRepository personalRepository;
@@ -25,7 +25,7 @@ public class PersonalController {
     @GetMapping("/personal")
     public String listaPersonal(){
 
-        return "listaVinos";
+        return "listaPersonal";
 
     }
 }
