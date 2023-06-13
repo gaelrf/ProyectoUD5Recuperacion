@@ -1,31 +1,71 @@
 package com.example.proyectoud5recuperacion.controller;
 
-import com.example.proyectoud5recuperacion.repository.PersonalRepository;
+import com.example.proyectoud5recuperacion.data.PersonalData;
+import com.example.proyectoud5recuperacion.entities.Personal;
+import com.example.proyectoud5recuperacion.services.PersonalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.math.BigInteger;
+import java.util.List;
 
 @Controller
 public class PersonalController {
 
-    private final PersonalRepository personalRepository;
-
-    public PersonalController(PersonalRepository personalRepository) {
-        this.personalRepository = personalRepository;
-    }
+    @Autowired
+    PersonalService personalService;
 
     @GetMapping("/")
-    public String inicio(Model model){
+    public String inicio(){
 
-        System.out.println('a');
         return "redirect:/personal";
 
     }
 
     @GetMapping("/personal")
-    public String listaPersonal(){
+    public String listaPersonal(Model model){
 
+        List<Personal> personal = personalService.allPersonal();
+        model.addAttribute( "personal",personal);
         return "listaPersonal";
 
     }
+
+    @GetMapping("/personal/nuevo")
+    public String formNuevoPersonal(@ModelAttribute PersonalData personalData, Model model) {
+
+        return "formNuevoPersonal";
+
+    }
+
+    @PostMapping("/personal/nuevo")
+    public String nuevoPersonal(@ModelAttribute PersonalData personalData, RedirectAttributes flash){
+
+
+
+        personalService.nuevoEmpleado(personalData);
+
+        return "redirect:/personal";
+
+    }
+
+    @DeleteMapping("personal/{id}")
+    public String personalDelete(@PathVariable(value="id") BigInteger idPersonal){
+
+        Personal personal = personalService.findPersonaById(idPersonal);
+
+        if (personal==null){
+
+
+        }
+
+        personalService.borrarPersona(idPersonal);
+
+        return "";
+
+    }
+
 }

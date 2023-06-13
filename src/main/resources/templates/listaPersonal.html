@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Personal</title>
-</head>
+<head th:replace="fragments :: head (titulo='Personal')"></head>
 <body>
 <div class="container-fluid">
 
     <div class="row mt-3">
         <div class="col">
-            <h2 th:text=" 'Listado de vinos ' "></h2>
+            <h2 th:text=" 'Lista del personal ' "></h2>
         </div>
     </div>
 
@@ -18,28 +15,27 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Vino</th>
-                    <th>Acción</th>
+                    <th>Nombre</th>
+                    <th>Responsabilidades</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="vino: ${vinos}">
-                    <td th:text="${vino.id}"></td>
-                    <td th:text="${vino.nombre}"></td>
-                    <td><a class="btn btn-primary btn-xs" th:href="@{/vinos/{id}/editar(id=${vino.id})}"/>editar</a>
-                        <a class="btn btn-secondary btn-xs" th:href="@{/vinos/{id}/comentar(id=${vino.id})}"/>comentario</a>
-                        <a class="btn btn-secondary btn-xs" th:href="@{/vinos/{id}/bodega(id=${vino.id})}"/>Añadir/Modificar Bodega</a>
+                <tr th:each="persona: ${personal}">
+                    <td th:text="${persona.nombre}"></td>
+                    <td th:text="${persona.responsabilidad}"></td>
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/visualizar(id=${persona.id})}"/>Ver
+                        detalles</a>
                         <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"
-                                th:onclick="'del(\'/vinos/' + ${vino.id} + '\')'">borrar
+                                th:onclick="'del(\'/presonal/' + ${persona.id} + '\')'">borrar
                         </button>
                     </td>
 
                 </tr>
                 </tbody>
             </table>
-            <p><a class="btn btn-primary" th:href="@{/usuarios/{id}/vinos/nuevo(id=${usuario.idUsuario})}"> Nuevo vino</a>
-                <a class="btn btn-link" href="/logout">Salir</a></p>
+            <p><a class="btn btn-primary" th:href="@{/personal/nuevo}"> Nuevo vino</a>
+            </p>
         </div>
     </div>
     <div class="row mt-2">
