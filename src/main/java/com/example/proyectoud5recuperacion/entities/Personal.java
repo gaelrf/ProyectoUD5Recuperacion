@@ -17,8 +17,9 @@ public class Personal {
 
     private String responsabilidad;
 
-    private float salario;
+    private int salario;
 
+    private Clinica clinica;
     @DBRef
     private List<Paciente> pacientes;
 
@@ -42,12 +43,20 @@ public class Personal {
         this.responsabilidad = responsabilidad;
     }
 
-    public float getSalario() {
+    public int getSalario() {
         return salario;
     }
 
-    public void setSalario(float salario) {
+    public void setSalario(int salario) {
         this.salario = salario;
+    }
+
+    public Clinica getClinica() {
+        return clinica;
+    }
+
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
     }
 
     public List<Paciente> getPacientes() {

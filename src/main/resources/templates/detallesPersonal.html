@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head (titulo='Personal')"></head>
+<body>
+<div class="container-fluid">
+
+    <div class="row mt-3">
+        <div class="col">
+            <h2 th:text=" 'Detalles del Empleado ' "></h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td th:text="'Nombre del Empleado'"/>
+                    <td th:text="${persona.nombre}"/>
+                </tr>
+                <tr>
+                    <td th:text="'Responsabilidad del Empleado'"/>
+                    <td th:text="${persona.responsabilidad}"/>
+                </tr>
+                <tr>
+                    <td th:text="'Salario del Empleado'"/>
+                    <td th:text="${persona.salario}"/>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/modificar(id=${persona.id})}">Modificar</a>
+            <h4 th:text="Consulta"/>
+            <table class="table table-striped">
+                <tbody>
+                <tr th:switch="${persona.clinica}">
+                    <td th:text="'Clinica asignada al Empleado'"/>
+                    <div th:case="null">
+                        <td th:text="'No hay clinica asignada'"/>
+                        <td>
+                            <a class="btn btn-primary btn-xs"
+                               th:href="@{/personal/{id}/clinica/nueva(id=${persona.id})}">Añadir</a>
+                        </td>
+                    </div>
+                    <div th:case="*">
+                        <td th:text="${persona.clinica.numero} ?: 'No hay clinica asignada'"/>
+                        <td>
+                            <a class="btn btn-primary btn-xs"
+                               th:href="@{/personal/{id}/clinica/visualizar(id=${persona.id})}">Ver Detalles</a>
+                            <a class="btn btn-secondary btn-xs"
+                               th:href="@{/personal/{id}/clinica/modificar(id=${persona.id})}">Modificar</a>
+                            <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"
+                                    th:data-parameter="'/personal/'+${persona.id}+'/clinica/borrar'"
+                                    th:onclick="delCli(this.getAttribute('data-parameter'))">Borrar
+                            </button>
+                        </td>
+                    </div>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <h4 th:text="'Lista de Pacientes'"/>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="paciente: ${persona.pacientes}">
+                    <td th:text="${paciente.nombre}"></td>
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/visualizar(id=${persona.id})}">Ver
+                        detalles</a>
+                        <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"
+                                th:data-parameter="'/paciente/'+${paciente.id}"
+                                th:onclick="del(this.getAttribute('data-parameter'))">Borrar
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="row mt-3">
+        <a class="btn btn-secondary btn-xs" th:href="@{/personal}">Volver</a>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                 th:if="${!#strings.isEmpty(mensaje)}">
+                <span th:text="${mensaje}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+<script th:inline="javascript" type="text/javascript">
+    function delCli(urlBorrar) {
+        if (confirm('¿Estás seguro/a de que quieres borrar la consulta?')) {
+            fetch(urlBorrar, {
+                method: 'DELETE'
+            }).then((res) => location.reload());
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ public class PersonalData {
 
     private String responsabilidad;
 
-    private float salario;
+    private int salario;
 
     public String getNombre() {
         return nombre;
@@ -24,11 +24,11 @@ public class PersonalData {
         this.responsabilidad = responsabilidad;
     }
 
-    public float getSalario() {
+    public int getSalario() {
         return salario;
     }
 
-    public void setSalario(float salario) {
+    public void setSalario(int salario) {
         this.salario = salario;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -44,8 +45,6 @@ public class PersonalController {
     @PostMapping("/personal/nuevo")
     public String nuevoPersonal(@ModelAttribute PersonalData personalData, RedirectAttributes flash){
 
-
-
         personalService.nuevoEmpleado(personalData);
 
         return "redirect:/personal";
@@ -67,6 +66,43 @@ public class PersonalController {
 
         return "";
 
+    }
+
+    @GetMapping("personal/{id}/visualizar")
+    public String personalDetalles(@PathVariable(value = "id") ObjectId idPersonal, Model model){
+
+        Personal persona = personalService.findPersonaById(idPersonal);
+        model.addAttribute("persona", persona);
+
+        return"detallesPersonal";
+
+
+    }
+
+    @GetMapping("personal/{id}/modificar")
+    public String formPersonalModificar(@PathVariable(value = "id") ObjectId idPersonal,@ModelAttribute PersonalData personaData, Model model){
+
+        Personal persona = personalService.findPersonaById(idPersonal);
+        model.addAttribute("persona",persona);
+        personaData.setNombre(persona.getNombre());
+        personaData.setResponsabilidad(persona.getResponsabilidad());
+        personaData.setSalario(persona.getSalario());
+        model.addAttribute("personaData",personaData);
+
+        return"formModificarPersonal";
+
+    }
+
+    @PostMapping("personal/{id}/modificar")
+    public String personalModificar(@PathVariable(value = "id") ObjectId idPersonal, @ModelAttribute PersonalData personaData, Model model){
+
+        Personal empleado = personalService.findPersonaById(idPersonal);
+        empleado.setNombre(personaData.getNombre());
+        empleado.setResponsabilidad(personaData.getResponsabilidad());
+        empleado.setSalario(personaData.getSalario());
+        personalService.modificarPersonal(empleado);
+
+        return"redirect:/personal/"+ idPersonal +"/visualizar";
     }
 
 }

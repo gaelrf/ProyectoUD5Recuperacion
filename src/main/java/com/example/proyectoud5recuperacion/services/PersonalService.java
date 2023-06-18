@@ -51,4 +51,10 @@ public class PersonalService {
 
     }
 
+    public void modificarPersonal(Personal empleado) {
+
+
+        personalRepository.save(empleado);
+
+    }
 }
