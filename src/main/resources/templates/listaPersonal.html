@@ -24,17 +24,18 @@
                 <tr th:each="persona: ${personal}">
                     <td th:text="${persona.nombre}"></td>
                     <td th:text="${persona.responsabilidad}"></td>
-                    <td><a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/visualizar(id=${persona.id})}"/>Ver
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/visualizar(id=${persona.id})}">Ver
                         detalles</a>
                         <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"
-                                th:onclick="'del(\'/presonal/' + ${persona.id} + '\')'">borrar
+                                th:data-parameter="'/personal/'+${persona.id}"
+                                th:onclick="del(this.getAttribute('data-parameter'))">Borrar
                         </button>
                     </td>
 
                 </tr>
                 </tbody>
             </table>
-            <p><a class="btn btn-primary" th:href="@{/personal/nuevo}"> Nuevo vino</a>
+            <p><a class="btn btn-primary" th:href="@{/personal/nuevo}"> Nuevo Empleado</a>
             </p>
         </div>
     </div>
@@ -58,7 +59,7 @@
 
 <!-- Lanzamos una petición DELETE por JavaScript para borrar una tarea -->
 
-<script type="text/javascript">
+<script th:inline="javascript" type="text/javascript">
     function del(urlBorrar) {
         if (confirm('¿Estás seguro/a de que quieres borrar el vino?')) {
             fetch(urlBorrar, {

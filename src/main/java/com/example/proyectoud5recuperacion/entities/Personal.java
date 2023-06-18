@@ -1,17 +1,17 @@
 package com.example.proyectoud5recuperacion.entities;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Document
 public class Personal {
 
     @Id
-    private BigInteger id;
+    private ObjectId id;
 
     private String nombre;
 
@@ -22,7 +22,7 @@ public class Personal {
     @DBRef
     private List<Paciente> pacientes;
 
-    public BigInteger getId() {
+    public ObjectId getId() {
         return id;
     }
 

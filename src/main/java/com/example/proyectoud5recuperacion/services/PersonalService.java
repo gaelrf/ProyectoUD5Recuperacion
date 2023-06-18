@@ -7,7 +7,6 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -39,16 +38,16 @@ public class PersonalService {
 
     }
 
-    public Personal findPersonaById(BigInteger idPersonal) {
+    public Personal findPersonaById(ObjectId idPersonal) {
 
         Personal persona =personalRepository.findById(idPersonal).orElse(null);
         return persona;
 
     }
 
-    public void borrarPersona(BigInteger idPersonal) {
+    public void borrarPersona(ObjectId idPersonal) {
 
-        personalRepository.deleteById();
+        personalRepository.deleteById(idPersonal);
 
     }
 
