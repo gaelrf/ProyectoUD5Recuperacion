@@ -2,9 +2,11 @@ package com.example.proyectoud5recuperacion.services;
 
 import com.example.proyectoud5recuperacion.entities.Paciente;
 import com.example.proyectoud5recuperacion.repository.PacienteRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,9 +31,21 @@ public class PacienteService {
 
     }
 
-    public List<Paciente> listarPacientes(){
+    public List<Paciente> listarPacientes(List<Paciente> pacientes){
 
-        return pacienteRepository.findAll();
+        List<ObjectId> ids = new ArrayList<>();
+        for ( Paciente paciente: pacientes){
+
+            ids.add(paciente.getId());
+
+        }
+        return pacienteRepository.findByIdNotIn(ids);
+
+    }
+
+    public Paciente findPacienteById(ObjectId idPaciente) {
+
+        return pacienteRepository.findById(idPaciente).orElse(null);
 
     }
 }

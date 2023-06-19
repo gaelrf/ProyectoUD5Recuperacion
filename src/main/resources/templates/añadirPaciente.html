@@ -25,7 +25,7 @@
                     <td th:text="${paciente.nombre}"></td>
                     <td th:text="${paciente.nuss}"></td>
                     <td>
-                        <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/anadir/{idPaciente}(id=${idPersona},idPaciente=${paciente.id})}">Añadir</a>
+                        <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/anhadir/{idPaciente}(id=${idPersona},idPaciente=${paciente.id})}">Añadir</a>
                         <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"
                                 th:data-parameter="'/personal/'+${idPersona}"
                                 th:onclick="del(this.getAttribute('data-parameter'))">Borrar
@@ -35,7 +35,7 @@
                 </tr>
                 </tbody>
             </table>
-            <p><a class="btn btn-primary" th:href="@{/personal/nuevo}"> Nuevo Empleado</a>
+            <p><a class="btn btn-primary" th:href="@{/personal/{id}/visualizar(id=${idPersona})}">Volver</a>
             </p>
         </div>
     </div>

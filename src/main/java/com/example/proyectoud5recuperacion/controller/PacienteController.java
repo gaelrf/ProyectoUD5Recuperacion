@@ -76,19 +76,12 @@ public class PacienteController {
     @GetMapping("/personal/{id}/paciente/listar")
     public String listarPaciente(@PathVariable(value = "id") ObjectId idPersona, @ModelAttribute PacienteData pacienteData, Model model){
 
-        List<Paciente> pacientes = pacienteService.listarPacientes();
         Personal personal = personalService.findPersonaById(idPersona);
-
-        for (Paciente paciente: personal.getPacientes()){
-
-
-            if (pacientes.contains(paciente)){
-
-                pacientes.remove(paciente);
-
-            }
-
-
+        List<Paciente> pacientes = new ArrayList<>();
+        if (personal.getPacientes()!=null) {
+            pacientes = pacienteService.listarPacientes(personal.getPacientes());
+        }else {
+            pacientes = pacienteService.listarPacientes(pacientes);
 
         }
 
@@ -98,11 +91,23 @@ public class PacienteController {
         return"añadirPaciente";
 
     }
-    @GetMapping("/personal/{id}/paciente/anadir/{idPaciente}")
+    @GetMapping("/personal/{id}/paciente/anhadir/{idPaciente}")
     public String añadirPaciente(@PathVariable(value = "id") ObjectId idPersona,@PathVariable(value = "idPaciente")ObjectId idPaciente, @ModelAttribute PacienteData pacienteData, Model model){
 
+        Personal persona = personalService.findPersonaById(idPersona);
+        Paciente paciente = pacienteService.findPacienteById(idPaciente);
+        if (persona.getPacientes()==null){
+            List<Paciente> pacientes = new ArrayList<>();
+            pacientes.add(paciente);
+            persona.setPacientes(pacientes);
+        }else {
+            persona.getPacientes().add(paciente);
+        }
+        System.out.println(persona.getPacientes());
+        personalService.modificarPersonal(persona);
 
-        return"redirect:/personal/"+idPersona+"/paciente/añadir";
+
+        return"redirect:/personal/"+idPersona+"/paciente/listar";
 
     }
 
