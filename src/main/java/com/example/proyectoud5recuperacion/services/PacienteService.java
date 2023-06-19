@@ -21,4 +21,9 @@ public class PacienteService {
 
     }
 
+    public void borrarPaciente(Paciente paciente){
+
+        pacienteRepository.delete(paciente);
+
+    }
 }

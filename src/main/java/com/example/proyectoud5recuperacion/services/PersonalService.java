@@ -53,8 +53,6 @@ public class PersonalService {
 
     public void modificarPersonal(Personal empleado) {
 
-        System.out.println("a");
-
         personalRepository.save(empleado);
 
     }
