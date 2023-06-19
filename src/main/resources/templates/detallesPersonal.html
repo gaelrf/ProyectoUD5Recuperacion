@@ -68,9 +68,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="paciente: ${persona.pacientes}">
+                <tr th:each="paciente, i: ${persona.pacientes}">
                     <td th:text="${paciente.nombre}"></td>
-                    <td><a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/visualizar(id=${persona.id})}">Ver
+                    <td><a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/{iterator}(id=${persona.id},iterator=${i})}">Ver
                         detalles</a>
                         <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"
                                 th:data-parameter="'/paciente/'+${paciente.id}"
@@ -80,7 +80,7 @@
                 </tr>
                 </tbody>
             </table>
-
+            <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/nuevo(id=${id})}">Nuevo paciente</a>
         </div>
     </div>
     <div class="row mt-3">

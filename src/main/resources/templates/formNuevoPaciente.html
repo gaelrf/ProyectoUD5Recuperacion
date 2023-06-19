@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head (titulo='Login')"></head>
+
+<body>
+<div class="container-fluid">
+
+  <h2 th:text="'Nuevo empleado del hospital' "></h2>
+
+  <form method="post" th:action="@{/personal/{id}/paciente/nuevo(id=${idPersona})}" th:object="${pacienteData}">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input class="form-control" id="nombre" name="nombre" required th:field="*{nombre}" type="text"/>
+        <label for="nombre">NUSS:</label>
+        <input class="form-control" id="responsabilidad" required name="nombre" th:field="*{nuss}" type="text"/>
+        <label for="nombre">Edad:</label>
+        <input class="form-control" id="salario" name="nombre" required th:field="*{edad}" type="number"/>
+      </div>
+      <button class="btn btn-primary" type="submit">Crear y añadir Paciente</button>
+      <a class="btn btn-link" th:href="@{/personal/{id}/visualizar(id=${idPersona})}">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+<div th:replace="fragments::javascript"/>
+
+</body>
