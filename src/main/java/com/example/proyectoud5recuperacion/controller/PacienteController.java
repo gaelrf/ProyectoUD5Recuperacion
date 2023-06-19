@@ -73,5 +73,37 @@ public class PacienteController {
         return "redirect:/personal/"+idPersona+"/visualizar";
 
     }
+    @GetMapping("/personal/{id}/paciente/listar")
+    public String listarPaciente(@PathVariable(value = "id") ObjectId idPersona, @ModelAttribute PacienteData pacienteData, Model model){
+
+        List<Paciente> pacientes = pacienteService.listarPacientes();
+        Personal personal = personalService.findPersonaById(idPersona);
+
+        for (Paciente paciente: personal.getPacientes()){
+
+
+            if (pacientes.contains(paciente)){
+
+                pacientes.remove(paciente);
+
+            }
+
+
+
+        }
+
+        model.addAttribute("pacientes", pacientes);
+        model.addAttribute("idPersona", idPersona);
+
+        return"añadirPaciente";
+
+    }
+    @GetMapping("/personal/{id}/paciente/anadir/{idPaciente}")
+    public String añadirPaciente(@PathVariable(value = "id") ObjectId idPersona,@PathVariable(value = "idPaciente")ObjectId idPaciente, @ModelAttribute PacienteData pacienteData, Model model){
+
+
+        return"redirect:/personal/"+idPersona+"/paciente/añadir";
+
+    }
 
 }
