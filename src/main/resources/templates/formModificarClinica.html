@@ -11,12 +11,12 @@
     <form method="post" th:action="@{/personal/{id}/clinica/modificar(id=${idPersona})}" th:object="${clinicaData}">
         <div class="col-6">
             <div class="form-group">
-                <label for="nombre">Nùmero:</label>
-                <input class="form-control" id="nombre" name="nombre" required th:value="${clinicaData.numero}" type="number"/>
-                <label for="nombre">Uso:</label>
-                <input class="form-control" id="responsabilidad" required name="nombre" th:value="${clinicaData.uso}" type="text"/>
-                <label for="nombre">Tamaño:</label>
-                <input class="form-control" id="salario" name="nombre" required th:value="${clinicaData.tamanho}" type="number"/>
+                <label for="numero">Nùmero:</label>
+                <input class="form-control" id="numero" name="numero" required th:value="${clinicaData.numero}" type="number"/>
+                <label for="uso">Uso:</label>
+                <input class="form-control" id="uso" required name="uso" th:value="${clinicaData.uso}" type="text"/>
+                <label for="tamanho">Tamaño:</label>
+                <input class="form-control" id="tamanho" name="tamanho" required th:value="${clinicaData.tamanho}" type="number"/>
             </div>
             <button class="btn btn-primary" type="submit">Modificar clinica</button>
             <a class="btn btn-link" th:href="@{/personal/{id}/visualizar(id=${idPersona})}">Cancelar</a>

@@ -13,10 +13,10 @@
             <div class="form-group">
                 <label for="nombre">Nombre del Empleado:</label>
                 <input class="form-control" id="nombre" name="nombre" required th:value="${personaData.nombre}" type="text"/>
-                <label for="nombre">Responsabilidad:</label>
-                <input class="form-control" id="responsabilidad" required name="nombre" th:field="${personaData.responsabilidad}" type="text"/>
-                <label for="nombre">Salario:</label>
-                <input class="form-control" id="salario" name="nombre" required th:field="${personaData.salario}" type="number"/>
+                <label for="responsabilidad">Responsabilidad:</label>
+                <input class="form-control" id="responsabilidad" required name="responsabilidad" th:value="${personaData.responsabilidad}" type="text"/>
+                <label for="salario">Salario:</label>
+                <input class="form-control" id="salario" name="salario" required th:value="${personaData.salario}" type="number"/>
             </div>
             <button class="btn btn-primary" type="submit">Crear empleado</button>
             <a class="btn btn-link" th:href="@{/personal/{id}/visualizar(id=${persona.id})}">Cancelar</a>

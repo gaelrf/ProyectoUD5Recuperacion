@@ -114,38 +114,44 @@ public class PacienteController {
     }
 
     @GetMapping("/personal/{id}/paciente/{idPaciente}")
-    public String detallesPaciente(@PathVariable(value = "id")ObjectId idPersona,@PathVariable(value = "idPaciente") ObjectId idPaciente){
+    public String detallesPaciente(@PathVariable(value = "id")ObjectId personaId,@PathVariable(value = "idPaciente") ObjectId idPaciente, Model model){
 
+        Paciente paciente = pacienteService.findPacienteById(idPaciente);
+        model.addAttribute("personaId",personaId);
+        model.addAttribute("paciente",paciente);
 
         return "detallesPaciente";
 
     }
 
-    @GetMapping("/personal/{id}/paciente/modificar")
+    @GetMapping("/personal/{id}/paciente/modificar/{idPaciente}")
     public String formModificarClinica(@PathVariable(value = "id")ObjectId idPersona,@PathVariable(value = "idPaciente") ObjectId idPaciente ,@ModelAttribute PacienteData pacienteData, Model model){
 
         Paciente paciente = pacienteService.findPacienteById(idPaciente);
         pacienteData.setNombre(paciente.getNombre());
         pacienteData.setNuss(paciente.getNuss());
         pacienteData.setEdad(paciente.getEdad());
-        model.addAttribute("clinicaData",pacienteData);
+        model.addAttribute("pacienteData",pacienteData);
+        model.addAttribute("idPaciente",idPaciente);
         model.addAttribute("idPersona",idPersona);
 
-        return"formNuevaClinica";
+        return"formModificarPaciente";
 
     }
 
-    @PostMapping("/personal/{id}/paciente/modificar")
-    public String modificarClinica(@PathVariable(value = "id")ObjectId idPersona, @ModelAttribute PacienteData pacienteData){
+    @PostMapping("/personal/{id}/paciente/modificar/{idPaciente}")
+    public String modificarClinica(@PathVariable(value = "id")ObjectId idPersona, @PathVariable(value = "idPaciente") ObjectId idPaciente ,@ModelAttribute PacienteData pacienteData){
 
-        Personal persona = personalService.findPersonaById(idPersona);
-        Paciente paciente = new Clinica();
-        clinica.setNumero(clinicaData.getNumero());
-        clinica.setUso(clinicaData.getUso());
-        clinica.setTamanho(clinicaData.getTamanho());
+        Paciente paciente = pacienteService.findPacienteById(idPaciente);
+
+        System.out.println(pacienteData.getNombre());
+
+        paciente.setNombre(pacienteData.getNombre());
+        paciente.setNuss(pacienteData.getNuss());
+        paciente.setEdad(pacienteData.getEdad());
         pacienteService.nuevoPaciente(paciente);
 
-        return"redirect:/personal/"+idPersona+"/visualizar";
+        return"redirect:/personal/"+idPersona+"/paciente/"+idPaciente;
 
     }
 

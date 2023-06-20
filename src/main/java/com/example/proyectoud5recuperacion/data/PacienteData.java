@@ -32,4 +32,12 @@ public class PacienteData {
         this.edad = edad;
     }
 
+    @Override
+    public String toString() {
+        return "PacienteData{" +
+                "nombre='" + nombre + '\'' +
+                ", nuss='" + nuss + '\'' +
+                ", edad=" + edad +
+                '}';
+    }
 }

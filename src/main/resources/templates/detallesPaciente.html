@@ -14,20 +14,20 @@
             <table class="table table-striped">
                 <tbody>
                 <tr>
-                    <td th:text="'Numero'"/>
-                    <td th:text="${clinica.numero}"/>
+                    <td th:text="'Nombre'"/>
+                    <td th:text="${paciente.nombre}"/>
                 </tr>
                 <tr>
-                    <td th:text="'Uso'"/>
-                    <td th:text="${clinica.uso}"/>
+                    <td th:text="'Nuss'"/>
+                    <td th:text="${paciente.nuss}"/>
                 </tr>
                 <tr>
-                    <td th:text="'Tamaño'"/>
-                    <td th:text="${clinica.tamanho}"/>
+                    <td th:text="'Edad'"/>
+                    <td th:text="${paciente.edad}"/>
                 </tr>
                 </tbody>
             </table>
-            <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/clinica/modificar(id=${personaId})}">Modificar</a>
+            <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/modificar/{pacienteId}(id=${personaId},pacienteId=${paciente.id})}">Modificar</a>
         </div>
     </div>
     <div class="row mt-3">
@@ -53,4 +53,4 @@
 
 
 </body>
-</html>>
+</html>
