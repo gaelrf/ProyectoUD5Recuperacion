@@ -4,7 +4,7 @@
 
 Es una Aplicación para gestionar el personal de un hospital por lo que esta **MUY** centrada en el personal.
 
-###Manual de Desarrollador
+### Manual de Desarrollador
 
 El proyecto esta hecho con Springboot por lo que sigue un MVC.
 
@@ -14,7 +14,7 @@ La Vista son las diferentes templates de Spring que se muestran por pantalla, pa
 
 El Controlador se encarga de procesar los Datos para que puedan ser mostrados o guardados.
 
-###Manual de Usuario
+### Manual de Usuario
 
 La aplicación empieza con una lista de empleados que podemos añadir, ver sus detaller, modificar o borrar.
 
@@ -28,11 +28,11 @@ Para gestionar los pacientes desde aqui podemos crear y añadir un pacente, aña
 
 Al añadir un paciente vemos la lista de pacientes que no estan asociados al empleado que estamos gestionar y podemos añadirlos al empleado, borrarlos, o modificarlos.
 
-###Propuestas de Mejora
+### Propuestas de Mejora
 
-- Que el ObjectID no vaya en la barra de tareas.
+- Que el ObjectID no vaya en la URL.
 - Tener un Log In que funcione de verdad.
 
-###Conclusión
+### Conclusión
 
 Fe un proyecto diferente que me permitió ver un poco mas como va spring y como se puede adaptar a diferentes tecnologías.
