@@ -71,7 +71,7 @@
                 <tr th:each="paciente,i : ${persona.pacientes}">
                     <td th:text="${paciente.nombre}"></td>
                     <td>
-                        <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/{iterator}(id=${persona.id},iterator=${i.index})}">Ver
+                        <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/{iterator}(id=${persona.id},iterator=${paciente.id})}">Ver
                             detalles</a>
                         <a class="btn btn-primary btn-xs" th:href="@{/personal/{id}/paciente/{iterator}/quitar(id=${persona.id},iterator=${i.index})}">Quitar</a>
                         <button class="btn btn-danger btn-xs" onmouseover="" style="cursor: pointer;"

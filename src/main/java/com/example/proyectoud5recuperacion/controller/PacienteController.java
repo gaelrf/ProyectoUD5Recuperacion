@@ -1,6 +1,8 @@
 package com.example.proyectoud5recuperacion.controller;
 
+import com.example.proyectoud5recuperacion.data.ClinicaData;
 import com.example.proyectoud5recuperacion.data.PacienteData;
+import com.example.proyectoud5recuperacion.entities.Clinica;
 import com.example.proyectoud5recuperacion.entities.Paciente;
 import com.example.proyectoud5recuperacion.entities.Personal;
 import com.example.proyectoud5recuperacion.services.PacienteService;
@@ -108,6 +110,42 @@ public class PacienteController {
 
 
         return"redirect:/personal/"+idPersona+"/paciente/listar";
+
+    }
+
+    @GetMapping("/personal/{id}/paciente/{idPaciente}")
+    public String detallesPaciente(@PathVariable(value = "id")ObjectId idPersona,@PathVariable(value = "idPaciente") ObjectId idPaciente){
+
+
+        return "detallesPaciente";
+
+    }
+
+    @GetMapping("/personal/{id}/paciente/modificar")
+    public String formModificarClinica(@PathVariable(value = "id")ObjectId idPersona,@PathVariable(value = "idPaciente") ObjectId idPaciente ,@ModelAttribute PacienteData pacienteData, Model model){
+
+        Paciente paciente = pacienteService.findPacienteById(idPaciente);
+        pacienteData.setNombre(paciente.getNombre());
+        pacienteData.setNuss(paciente.getNuss());
+        pacienteData.setEdad(paciente.getEdad());
+        model.addAttribute("clinicaData",pacienteData);
+        model.addAttribute("idPersona",idPersona);
+
+        return"formNuevaClinica";
+
+    }
+
+    @PostMapping("/personal/{id}/paciente/modificar")
+    public String modificarClinica(@PathVariable(value = "id")ObjectId idPersona, @ModelAttribute PacienteData pacienteData){
+
+        Personal persona = personalService.findPersonaById(idPersona);
+        Paciente paciente = new Clinica();
+        clinica.setNumero(clinicaData.getNumero());
+        clinica.setUso(clinicaData.getUso());
+        clinica.setTamanho(clinicaData.getTamanho());
+        pacienteService.nuevoPaciente(paciente);
+
+        return"redirect:/personal/"+idPersona+"/visualizar";
 
     }
 
